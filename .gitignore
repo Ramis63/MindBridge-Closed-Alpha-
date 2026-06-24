@@ -1,0 +1,22 @@
+# Database (auto-generated, do not commit)
+mindbridge.db
+*.db
+*.sqlite3
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Environment files
+.env
+*.env
+
+# Node modules (if ever added)
+node_modules/
+
+# OS junk
+.DS_Store
+Thumbs.db
+desktop.ini

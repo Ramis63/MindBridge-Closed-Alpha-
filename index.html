@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>MindBridge — Student Mental Health Tracker</title>
+  
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="MindBridge is a privacy-first, local-storage student wellness tracker to monitor stress, anxiety, and burnout. Created specifically for university students.">
+  <meta name="theme-color" content="#10b981">
+  
+  <!-- Premium Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS Play CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Tailwind Config & Custom Utilities -->
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Outfit', 'sans-serif'],
+          },
+          fontSize: {
+            'xxs': '0.7rem',
+            'xxxs': '0.6rem',
+          },
+          height: {
+            '0.75': '0.1875rem',
+          },
+          animation: {
+            'pulse-subtle': 'pulseSubtle 4s ease-in-out infinite',
+            'bounce-slow': 'bounceSlow 3s ease-in-out infinite',
+            'grow-height': 'growHeight 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+            'fade-in-width': 'fadeInWidth 0.4s ease-out forwards',
+          }
+        }
+      }
+    }
+  </script>
+  
+  <!-- Custom CSS for animations and tweaks -->
+  <style type="text/css">
+    body {
+      font-family: 'Outfit', sans-serif;
+      overscroll-behavior-y: contain; /* smooth mobile feel */
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    @keyframes pulseSubtle {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.95; transform: scale(1.03); }
+    }
+    
+    @keyframes bounceSlow {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-4px); }
+    }
+    
+    @keyframes growHeight {
+      from { height: 0; }
+    }
+    
+    @keyframes fadeInWidth {
+      from { width: 0; opacity: 0; }
+      to { width: auto; opacity: 1; }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes scaleIn {
+      from { transform: scale(0.95); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .animate-fade-in {
+      animation: fadeIn 0.25s ease-out forwards;
+    }
+
+    .animate-scale-in {
+      animation: scaleIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    }
+
+    /* Custom range input styling tweaks for stress/sleep sliders */
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: #10b981;
+      border: 3px solid #ffffff;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+      cursor: pointer;
+      transition: transform 0.1s;
+    }
+    input[type="range"]::-webkit-slider-thumb:active {
+      transform: scale(1.2);
+    }
+    .dark input[type="range"]::-webkit-slider-thumb {
+      background: #10b981;
+      border: 3px solid #0f172a;
+    }
+    
+    /* Hide scrollbars but keep functionality */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+
+  <!-- Diagnostic Runtime Error Banner -->
+  <script>
+    window.addEventListener('error', function(e) {
+      // Create banner on body load or immediately
+      const showErr = function() {
+        const div = document.createElement('div');
+        div.style.position = 'fixed';
+        div.style.top = '10px';
+        div.style.left = '10px';
+        div.style.right = '10px';
+        div.style.padding = '15px';
+        div.style.background = '#fee2e2';
+        div.style.color = '#991b1b';
+        div.style.border = '2px solid #fca5a5';
+        div.style.borderRadius = '12px';
+        div.style.zIndex = '999999';
+        div.style.fontFamily = 'monospace';
+        div.style.fontSize = '12px';
+        div.style.whiteSpace = 'pre-wrap';
+        div.innerHTML = '<strong>Runtime Error:</strong><br>' + e.message + '<br>at ' + e.filename + ':' + e.lineno + ':' + e.colno;
+        document.body.appendChild(div);
+      };
+      if (document.body) showErr();
+      else window.addEventListener('DOMContentLoaded', showErr);
+    });
+    window.addEventListener('unhandledrejection', function(e) {
+      const showRej = function() {
+        const div = document.createElement('div');
+        div.style.position = 'fixed';
+        div.style.top = '10px';
+        div.style.left = '10px';
+        div.style.right = '10px';
+        div.style.padding = '15px';
+        div.style.background = '#fee2e2';
+        div.style.color = '#991b1b';
+        div.style.border = '2px solid #fca5a5';
+        div.style.borderRadius = '12px';
+        div.style.zIndex = '999999';
+        div.style.fontFamily = 'monospace';
+        div.style.fontSize = '12px';
+        div.style.whiteSpace = 'pre-wrap';
+        div.innerHTML = '<strong>Unhandled Promise Rejection:</strong><br>' + (e.reason ? e.reason.message || e.reason : 'Unknown reason');
+        document.body.appendChild(div);
+      };
+      if (document.body) showRej();
+      else window.addEventListener('DOMContentLoaded', showRej);
+    });
+  </script>
+
+  <!-- ESM Import Maps -->
+  <script type="importmap">
+    {
+      "imports": {
+        "react": "https://esm.sh/react@18.3.1",
+        "react-dom": "https://esm.sh/react-dom@18.3.1",
+        "react-dom/client": "https://esm.sh/react-dom@18.3.1/client",
+        "htm": "https://esm.sh/htm@3.1.1",
+        "lucide-react": "https://esm.sh/lucide-react@0.344.0?external=react"
+      }
+    }
+  </script>
+</head>
+<body class="bg-slate-50/50 dark:bg-slate-950 transition-colors duration-300">
+  
+  <!-- Glowing Calming Background Blobs -->
+  <div class="fixed inset-0 -z-10 overflow-hidden pointer-events-none select-none opacity-40 dark:opacity-20 transition-opacity duration-1000">
+    <div class="absolute -top-[10%] -left-[20%] w-[80%] h-[60%] rounded-full bg-gradient-to-br from-emerald-200 to-teal-100 blur-[130px] dark:from-emerald-900/30 dark:to-teal-900/10"></div>
+    <div class="absolute bottom-[10%] -right-[20%] w-[80%] h-[60%] rounded-full bg-gradient-to-tr from-indigo-100 to-purple-200 blur-[130px] dark:from-indigo-950/20 dark:to-purple-900/20"></div>
+  </div>
+
+  <!-- React Mount Point -->
+  <div id="root"></div>
+
+  <!-- Bootstrapping Script -->
+  <script type="module">
+    // Automatic one-time cleanup of legacy mock data in browser cache
+    if (!localStorage.getItem('mindbridge_clean_run_v1')) {
+      localStorage.clear();
+      localStorage.setItem('mindbridge_clean_run_v1', 'true');
+      console.log("Legacy mock data cleared from browser cache.");
+    }
+
+    import React from 'react';
+    import { createRoot } from 'react-dom/client';
+    import App from './src/App.js';
+
+    const root = createRoot(document.getElementById('root'));
+    root.render(React.createElement(App));
+  </script>
+</body>
+</html>
