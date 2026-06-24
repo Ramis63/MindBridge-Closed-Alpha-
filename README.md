@@ -54,6 +54,4 @@ mindbridge/
     └── db.js               # API fetch client & session storage
 ```
 
-## License
 
-MIT
