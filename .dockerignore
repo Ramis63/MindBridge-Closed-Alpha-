@@ -1,0 +1,22 @@
+# Database (stored in Docker volume, not baked into image)
+*.db
+*.sqlite3
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Git
+.git
+.gitignore
+
+# Docs
+README.md
+
+# Windows artifacts
+Thumbs.db
+desktop.ini
+
+# Dev scripts
+check_db.py

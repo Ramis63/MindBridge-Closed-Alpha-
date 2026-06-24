@@ -28,7 +28,7 @@ A student mental wellness tracker built with React and Python.
 
 ```bash
 # Clone the repo
-git clone https://github.com/YOUR_USERNAME/mindbridge.git
+git clone https://github.com/Ramis63/MindBridge-Closed-Alpha-/tree/main
 cd mindbridge
 
 # Start the server (no pip install needed!)

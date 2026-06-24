@@ -1,0 +1,16 @@
+services:
+  mindbridge:
+    build: .
+    container_name: mindbridge-app
+    ports:
+      - "8000:8000"
+    volumes:
+      # Persist the SQLite database across container restarts
+      - mindbridge-data:/data
+    restart: unless-stopped
+    environment:
+      - DB_PATH=/data/mindbridge.db
+
+volumes:
+  mindbridge-data:
+    driver: local

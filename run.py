@@ -8,7 +8,8 @@ import uuid
 
 PORT = 8000
 DIRECTORY = os.path.dirname(os.path.abspath(__file__))
-DB_FILE = os.path.join(DIRECTORY, 'mindbridge.db')
+# Use DB_PATH env var (set by Docker) or fall back to local file
+DB_FILE = os.environ.get('DB_PATH', os.path.join(DIRECTORY, 'mindbridge.db'))
 
 def hash_password(password, salt=None):
     if not salt:
